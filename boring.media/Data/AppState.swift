@@ -7,7 +7,10 @@
 
 import Foundation
 internal import Combine
+import UniformTypeIdentifiers
 
 class AppState : ObservableObject {
     @Published var droppedURLs: [URL] = []
+    
+    @Published var selectedConvertImage: [UTType] = []
 }
