@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var appState = AppState()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            FilePickerView()
+                .environmentObject(appState)
+            FileListView()
+                .environmentObject(appState)
         }
         .padding()
     }
