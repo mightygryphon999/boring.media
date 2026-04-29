@@ -9,7 +9,7 @@ import Foundation
 import ImageIO
 import UniformTypeIdentifiers
 
-func convert(inputURL: URL, outputURL: URL, outputType: UTType) throws {
+func image_convert_service(inputURL: URL, outputURL: URL, outputType: UTType) throws {
     guard let image_source = CGImageSourceCreateWithURL(inputURL as CFURL, nil) else { throw NSError(domain: "Decode Error", code: 1) }
     let cgImage = CGImageSourceCreateImageAtIndex(image_source, 0, nil)
     

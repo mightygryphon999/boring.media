@@ -18,6 +18,11 @@ struct ConversionSettingsView: View {
                     Text("PNG").tag(UTType.png)
                     Text("JPG").tag(UTType.jpeg)
                 }
+                .padding(5)
+                .glassEffect(.clear.tint(Color("buttonsForeground")))
+                Button("Convert") {
+                    
+                }
             }
         }
     }
