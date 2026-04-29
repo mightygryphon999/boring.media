@@ -16,7 +16,7 @@ struct FilePickerView: View {
     var picker: some View {
         Text("Drop File Here")
             .frame(width: 300, height: 300)
-            .glassEffect(.regular.tint(Color("foreground")), in: .rect(cornerRadius: 10))
+            .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
             .dropDestination(for: URL.self){ items, location in appState.droppedURLs.append(contentsOf: items)
                 return true
             }
