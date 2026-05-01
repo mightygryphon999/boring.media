@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 
 class AppState : ObservableObject {
     @Published var droppedURLs: [URL] = []
+    @Published var outputURL: URL?
     
-    @Published var selectedConvertImage: [UTType] = []
+    @Published var selectedConvertImage: UTType = .png
 }

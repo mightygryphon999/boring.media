@@ -14,6 +14,8 @@ struct ContentView: View {
         VStack {
             //FilePickerView()
                 //.environmentObject(appState)
+            ConversionSettingsView()
+                .environmentObject(appState)
             FileListView()
                 .environmentObject(appState)
         }

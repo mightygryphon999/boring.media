@@ -20,9 +20,16 @@ struct ConversionSettingsView: View {
                 }
                 .padding(5)
                 .glassEffect(.clear.tint(Color("buttonsForeground")))
+                Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
+                    .frame(width: 250, height: 50)
+                    .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
+                    .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
+                        return true
+                    }
                 Button("Convert") {
-                    
+                    image_convert(appState: appState)
                 }
+                .buttonStyle(.glassProminent)
             }
         }
     }
