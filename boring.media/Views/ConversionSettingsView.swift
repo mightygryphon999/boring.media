@@ -17,6 +17,11 @@ struct ConversionSettingsView: View {
                 Picker(selection: $appState.selectedConvertImage, label: Text("To: ")) {
                     Text("PNG").tag(UTType.png)
                     Text("JPG").tag(UTType.jpeg)
+                    Text("GIF").tag(UTType.gif)
+                    Text("PDF").tag(UTType.pdf)
+                    Text("RAW").tag(UTType.rawImage)
+                    Text("HEIF").tag(UTType.heif)
+                    Text("TIFF").tag(UTType.tiff)
                 }
                 .padding(5)
                 .glassEffect(.clear.tint(Color("buttonsForeground")))
