@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 internal import Combine
 import UniformTypeIdentifiers
 
@@ -14,4 +15,5 @@ class AppState : ObservableObject {
     @Published var outputURL: URL?
     
     @Published var selectedConvertImage: UTType = .png
+    @Published var selectedConvertVideo: AVFileType = .mov
 }
