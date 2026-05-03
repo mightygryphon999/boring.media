@@ -24,3 +24,19 @@ func image_convert(appState: AppState) {
         print("Failed Converion: \(error)")
     }
 }
+
+func image_convert_specific(appState: AppState, inputURL: URL) {
+    let input = inputURL
+    
+    guard let output = appState.outputURL else {
+        print("No input file")
+        return
+    }
+    
+    do{
+        try image_convert_service(inputURL: input, outputURL: output, outputType: appState.selectedConvertImage)
+    } catch {
+        print("Failed Converion: \(error)")
+    }
+}
+

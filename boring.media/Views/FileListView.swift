@@ -39,8 +39,10 @@ struct FileListView: View {
         .glassEffect(.clear.tint(Color("foreground")), in: .rect(topLeadingCorner: 16, topTrailingCorner: 16, bottomLeadingCorner: 16, bottomTrailingCorner: 16))
         .padding()
         .dropDestination(for: URL.self){ items, location in appState.droppedURLs.append(contentsOf: items)
-            if (items.count == 1 && appState.outputURL != nil){
-                image_convert(appState: appState)
+            if (appState.outputURL != nil){
+                for item in items {
+                    image_convert_specific(appState: appState, inputURL: item)
+                }
             }
             return true
         }
