@@ -40,6 +40,7 @@ struct ConversionSettingsView: View {
             .tabItem{
                 Text("Image")
             }
+            .frame(height: 50)
             HStack{
                 Picker(selection: $appState.selectedConvertVideo, label: Text("To: ")) {
                     Text("MOV").tag(AVFileType.mov)
@@ -66,6 +67,7 @@ struct ConversionSettingsView: View {
             .tabItem{
                 Text("Video")
             }
+            .frame(height: 50)
         }
     }
 }
