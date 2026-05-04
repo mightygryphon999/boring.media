@@ -14,7 +14,9 @@ func image_convert_service(inputURL: URL, outputURL: URL, outputType: UTType) th
     
     let options: [CFString: Any] = [
         kCGImageSourceCreateThumbnailWithTransform: true,
-        kCGImageSourceCreateThumbnailFromImageAlways: true
+        kCGImageSourceCreateThumbnailFromImageAlways: true,
+        kCGImageSourceThumbnailMaxPixelSize: 3840,
+        kCGImageDestinationLossyCompressionQuality: 1.0
     ]
     
     let cgImage = CGImageSourceCreateThumbnailAtIndex(image_source, 0, options as CFDictionary)

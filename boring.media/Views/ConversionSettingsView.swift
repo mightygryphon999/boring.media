@@ -64,10 +64,10 @@ struct ConversionSettingsView: View {
                 }
                 .buttonStyle(.glassProminent)
             }
-            .tabItem{
-                Text("Video")
-            }
-            .frame(height: 50)
+//            .tabItem{
+//                Text("Video")
+//            }
+//            .frame(height: 50)
         }
     }
 }

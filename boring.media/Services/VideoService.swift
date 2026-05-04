@@ -40,7 +40,7 @@ func video_convert_service(videoURL: URL, withPreset preset: String = AVAssetExp
                 case .mp3: return "mp3"
                 case .mov: return "mov"
                 case .m4v: return "m4v"
-                case .avci: return "AVCI"
+                case .avci: return "avci"
             default: return "mp4"
             }
         }())
