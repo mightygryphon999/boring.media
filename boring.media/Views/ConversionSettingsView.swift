@@ -69,28 +69,39 @@ struct ConversionSettingsView: View {
 //            }
 //            .frame(height: 50)
 //        }
+        
         HStack{
-            Picker(selection: $appState.selectedConvertVideo, label: Text("To: ")) {
-                Text("MOV").tag(AVFileType.mov)
-                Text("MP4").tag(AVFileType.mp4)
-                Text("MP3").tag(AVFileType.mp3)
-                Text("AVCI").tag(AVFileType.avci)
-                Text("M4V").tag(AVFileType.m4v)
+            Picker(selection: $appState.selectedConvertImage, label: Text("To: ")) {
+                Text("PNG").tag(UTType.png)
+                Text("JPG").tag(UTType.jpeg)
+                Text("GIF").tag(UTType.gif)
+                Text("PDF").tag(UTType.pdf)
+                Text("RAW").tag(UTType.rawImage)
+                Text("HEIF").tag(UTType.heif)
+                Text("TIFF").tag(UTType.tiff)
             }
             .padding(10)
             .glassEffect(.clear.tint(Color("buttonsForeground")))
             Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
-                .frame(width: 250, height: 50)
+                .frame(width: 150, height: 50)
                 .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
                 .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
                     return true
                 }
             Button("Convert") {
-                Task {
-                    await video_convert(appState: appState)
-                }
+                image_convert(appState: appState)
             }
+            .frame(width: 150, height: 50)
+            .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
             .buttonStyle(.glassProminent)
+            .dropDestination(for: URL.self){ items, location in appState.droppedURLs.append(contentsOf: items)
+                if (appState.outputURL != nil){
+                    for item in items {
+                        image_convert_specific(appState: appState, inputURL: item)
+                    }
+                }
+                return true
+            }
         }
     }
 }

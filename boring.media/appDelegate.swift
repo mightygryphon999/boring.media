@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         panel = FloatingPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 600, height: 100)
+            contentRect: NSRect(x: 0, y: 0, width: 650, height: 100)
         )
 
         panel.contentView = NSHostingView(rootView: ContentView().environmentObject(appState))
