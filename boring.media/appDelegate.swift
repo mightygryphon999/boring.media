@@ -8,6 +8,7 @@
 import AppKit
 import SwiftUI
 import HotKey
+import SwiftData
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var panel: FloatingPanel!
@@ -21,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             contentRect: NSRect(x: 0, y: 0, width: 650, height: 100)
         )
 
-        panel.contentView = NSHostingView(rootView: ContentView().environmentObject(appState))
+        panel.contentView = NSHostingView(rootView: ContentView().environmentObject(appState).modelContainer(for: SaveData.self))
         panel.center()
         panel.orderOut(nil)
 
