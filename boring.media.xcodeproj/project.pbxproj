@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AED837DE2FA9734C0051CA12 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = AED837DD2FA9734C0051CA12 /* HotKey */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AEA896662FA17DEF00AE5FFA /* boring.media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boring.media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED837DE2FA9734C0051CA12 /* HotKey in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = boring.media;
 			packageProductDependencies = (
+				AED837DD2FA9734C0051CA12 /* HotKey */,
 			);
 			productName = boring.media;
 			productReference = AEA896662FA17DEF00AE5FFA /* boring.media.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = AEA8965D2FA17DEF00AE5FFA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AED837DC2FA9734C0051CA12 /* XCRemoteSwiftPackageReference "HotKey" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AEA896672FA17DEF00AE5FFA /* Products */;
 			projectDirPath = "";
@@ -329,6 +338,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AED837DC2FA9734C0051CA12 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AED837DD2FA9734C0051CA12 /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AED837DC2FA9734C0051CA12 /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AEA8965E2FA17DEF00AE5FFA /* Project object */;
 }
