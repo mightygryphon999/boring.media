@@ -7,12 +7,13 @@
 
 import HotKey
 import AppKit
+import SwiftUI
 
 extension AppDelegate {
     func setupHotkey() {
-        hotKey = HotKey(key: .space, modifiers: [.control])
+        hotKeySpace = HotKey(key: .space, modifiers: [.control])
 
-        hotKey?.keyDownHandler = { [weak self] in
+        hotKeySpace?.keyDownHandler = { [weak self] in
             guard let self = self else { return }
 
             if self.panel.isVisible {
@@ -21,6 +22,14 @@ extension AppDelegate {
                 self.panel.makeKeyAndOrderFront(nil)
                 NSApp.activate(ignoringOtherApps: true)
             }
+        }
+        
+        hotKeyL = HotKey(key: .l, modifiers: [.control])
+
+        hotKeyL?.keyDownHandler = { [weak self] in
+            guard let self = self else { return }
+
+            self.appState.maxamized.toggle()
         }
     }
 }

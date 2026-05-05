@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var appState = AppState()
+struct ContentView: View {    
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack {
@@ -16,8 +16,11 @@ struct ContentView: View {
                 //.environmentObject(appState)
             ConversionSettingsView()
                 .environmentObject(appState)
-            FileListView()
-                .environmentObject(appState)
+            
+            if (appState.maxamized){
+                FileListView()
+                    .environmentObject(appState)
+            }
         }
         .padding()
     }

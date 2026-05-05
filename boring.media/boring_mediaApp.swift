@@ -10,6 +10,12 @@ import SwiftUI
 @main
 struct boring_mediaApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @StateObject var appState = AppState()
+    
+    init() {
+        appDelegate.appState = appState
+    }
 
     var body: some Scene {
         Settings { EmptyView() }

@@ -16,4 +16,6 @@ class AppState : ObservableObject {
     
     @Published var selectedConvertImage: UTType = .png
     @Published var selectedConvertVideo: AVFileType = .mov
+    
+    @Published var maxamized: Bool = false
 }

@@ -23,5 +23,8 @@ class FloatingPanel: NSPanel {
         self.isOpaque = false
         self.backgroundColor = .blue
         self.hasShadow = true
+        self.titleVisibility = .hidden
+        self.isMovableByWindowBackground = true
+        self.titlebarAppearsTransparent = true
     }
 }

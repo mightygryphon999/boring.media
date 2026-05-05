@@ -11,14 +11,17 @@ import HotKey
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var panel: FloatingPanel!
-    var hotKey: HotKey?
+    var hotKeySpace: HotKey?
+    var hotKeyL: HotKey?
+    
+    var appState: AppState!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         panel = FloatingPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 600, height: 80)
+            contentRect: NSRect(x: 0, y: 0, width: 600, height: 100)
         )
 
-        panel.contentView = NSHostingView(rootView: ContentView())
+        panel.contentView = NSHostingView(rootView: ContentView().environmentObject(appState))
         panel.center()
         panel.orderOut(nil)
 
