@@ -10,7 +10,17 @@ import ImageIO
 import UniformTypeIdentifiers
 
 func image_convert_service(inputURL: URL, outputURL: URL, outputType: UTType) throws {
-    guard let image_source = CGImageSourceCreateWithURL(inputURL as CFURL, nil) else { throw NSError(domain: "Decode Error", code: 1) }
+    
+    let inputAccess = inputURL.startAccessingSecurityScopedResource()
+    let outputAccess = outputURL.startAccessingSecurityScopedResource()
+    
+    defer {
+        if inputAccess { inputURL.stopAccessingSecurityScopedResource() }
+        if outputAccess { outputURL.stopAccessingSecurityScopedResource() }
+    }
+    
+    guard let image_source = CGImageSourceCreateWithURL(inputURL as CFURL, nil)
+    else { throw NSError(domain: "Decode Error", code: 1) }
     
     let options: [CFString: Any] = [
         kCGImageSourceCreateThumbnailWithTransform: true,
@@ -19,19 +29,25 @@ func image_convert_service(inputURL: URL, outputURL: URL, outputType: UTType) th
         kCGImageDestinationLossyCompressionQuality: 1.0
     ]
     
-    let cgImage = CGImageSourceCreateThumbnailAtIndex(image_source, 0, options as CFDictionary)
+    guard let cgImage = CGImageSourceCreateThumbnailAtIndex(image_source, 0, options as CFDictionary)
+    else { throw NSError(domain: "Thumbnail Error", code: 4) }
     
-    let folderURL = outputURL
     let inputName = inputURL.deletingPathExtension().lastPathComponent
-    let ext = outputType.preferredFilenameExtension ?? " png"
+    let ext = outputType.preferredFilenameExtension ?? "png" // fixed
     
-    let outputFileURL = folderURL.appendingPathComponent("\(inputName)_converted").appendingPathExtension(ext)
+    let outputFileURL = outputURL
+        .appendingPathComponent("\(inputName)_converted")
+        .appendingPathExtension(ext)
     
-    guard let destination = CGImageDestinationCreateWithURL(outputFileURL as CFURL, outputType.identifier as CFString, 1, nil)
-            else { throw NSError(domain: "Encode Error", code: 2) }
+    guard let destination = CGImageDestinationCreateWithURL(
+        outputFileURL as CFURL,
+        outputType.identifier as CFString,
+        1,
+        nil
+    ) else { throw NSError(domain: "Encode Error", code: 2) }
     
-    CGImageDestinationAddImage(destination, cgImage!, nil)
-    guard CGImageDestinationFinalize(destination) else{
-        throw NSError(domain: "Finalize Error", code: 3)
-    }
+    CGImageDestinationAddImage(destination, cgImage, nil)
+    
+    guard CGImageDestinationFinalize(destination)
+    else { throw NSError(domain: "Finalize Error", code: 3) }
 }

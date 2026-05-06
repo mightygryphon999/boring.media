@@ -13,19 +13,20 @@ import UniformTypeIdentifiers
 
 @Model
 class SaveData {
-    var droppedURLs: [URL] = []
-    var outputURL: URL?
+    var droppedBookmarks: [Data] = []
+    var outputBookmark: Data?
+    
     var selectedConvertImage: String
     var maxamized: Bool = false
 
     init(
-        droppedURLs: [URL] = [],
-        outputURL: URL? = nil,
+        droppedBookmarks: [Data] = [],
+        outputBookmark: Data? = nil,
         selectedConvertImage: UTType = .png,
         maxamized: Bool = false
     ) {
-        self.droppedURLs = droppedURLs
-        self.outputURL = outputURL
+        self.droppedBookmarks = droppedBookmarks
+        self.outputBookmark = outputBookmark
         self.selectedConvertImage = selectedConvertImage.identifier
         self.maxamized = maxamized
     }
