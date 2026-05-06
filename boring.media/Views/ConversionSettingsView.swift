@@ -70,7 +70,17 @@ struct ConversionSettingsView: View {
 //            .frame(height: 50)
 //        }
         
-        HStack{
+        VStack{
+            Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
+                .frame(width: 200, height: 75)
+                .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
+                .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
+                    return true
+                }
+                .overlay{
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 5, lineCap: .round, dash: [10, 25]), antialiased: false)
+                }
             Picker(selection: $appState.selectedConvertImage, label: Text("To: ")) {
                 Text("PNG").tag(UTType.png)
                 Text("JPG").tag(UTType.jpeg)
@@ -80,18 +90,12 @@ struct ConversionSettingsView: View {
                 Text("HEIF").tag(UTType.heif)
                 Text("TIFF").tag(UTType.tiff)
             }
-            .padding(10)
+            .frame(width: 200, height: 75)
             .glassEffect(.clear.tint(Color("buttonsForeground")))
-            Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
-                .frame(width: 150, height: 50)
-                .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
-                .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
-                    return true
-                }
             Button("Convert") {
                 image_convert(appState: appState)
             }
-            .frame(width: 150, height: 50)
+            .frame(width: 200, height: 100)
             .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
             .buttonStyle(.glassProminent)
             .dropDestination(for: URL.self){ items, location in appState.droppedURLs.append(contentsOf: items)
@@ -101,6 +105,10 @@ struct ConversionSettingsView: View {
                     }
                 }
                 return true
+            }
+            .overlay{
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 5, lineCap: .round, dash: [10, 25]), antialiased: false)
             }
         }
     }
