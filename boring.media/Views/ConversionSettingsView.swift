@@ -70,7 +70,7 @@ struct ConversionSettingsView: View {
 //            .frame(height: 50)
 //        }
         
-        HStack{
+        VStack{
             Picker(selection: $appState.selectedConvertImage, label: Text("To: ")) {
                 Text("PNG").tag(UTType.png)
                 Text("JPG").tag(UTType.jpeg)
@@ -80,27 +80,51 @@ struct ConversionSettingsView: View {
                 Text("HEIF").tag(UTType.heif)
                 Text("TIFF").tag(UTType.tiff)
             }
-            .padding(10)
+            .frame(width: 200, height: 75)
             .glassEffect(.clear.tint(Color("buttonsForeground")))
-            Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
-                .frame(width: 150, height: 50)
-                .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
-                .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
-                    return true
-                }
             Button("Convert") {
                 image_convert(appState: appState)
             }
-            .frame(width: 150, height: 50)
+            .frame(width: 200, height: 100)
             .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
             .buttonStyle(.glassProminent)
-            .dropDestination(for: URL.self){ items, location in appState.droppedURLs.append(contentsOf: items)
+            .dropDestination(for: URL.self){ items, location in
+                withAnimation(.spring(duration: 0.35)) {
+                    appState.droppedURLs.append(contentsOf: items)
+                }
                 if (appState.outputURL != nil){
                     for item in items {
                         image_convert_specific(appState: appState, inputURL: item)
                     }
                 }
                 return true
+            }
+            .overlay{
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [10, 25]), antialiased: false)
+            }
+            Button("MORE") {
+                withAnimation(.spring(duration: 0.5)){
+                    appState.moreVisible.toggle()
+                }
+            }
+            .frame(width: 100, height: 25)
+            .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
+            .buttonStyle(.glassProminent)
+            if (appState.moreVisible){
+                Text("Output: \(appState.outputURL?.absoluteString ?? "none")")
+                    .frame(width: 200, height: 75)
+                    .glassEffect(.regular.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 10))
+                    .dropDestination(for: URL.self){ items, location in appState.outputURL = items.first
+                        return true
+                    }
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [10, 25]), antialiased: false)
+                    }
+                    .transition(.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
+                                            removal: .scale.combined(with: .opacity)))
+                
             }
         }
     }

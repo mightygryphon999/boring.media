@@ -18,4 +18,5 @@ class AppState : ObservableObject {
     @Published var selectedConvertVideo: AVFileType = .mov
     
     @Published var maxamized: Bool = false
+    @Published var moreVisible: Bool = false
 }

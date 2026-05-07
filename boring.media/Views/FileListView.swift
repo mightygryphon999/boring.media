@@ -20,6 +20,8 @@ struct FileListView: View {
                             .padding(25)
                             .overlay(RoundedRectangle(cornerRadius: 5).stroke(.white.opacity(0.5), lineWidth: 0.5))
                             .glassEffect(.clear.tint(Color("buttonsForeground")), in: .rect(cornerRadius: 5))
+                            .transition(.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
+                                                    removal: .scale.combined(with: .opacity)))
                     }
                 }
             }
