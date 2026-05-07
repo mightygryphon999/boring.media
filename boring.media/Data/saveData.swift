@@ -18,16 +18,19 @@ class SaveData {
     
     var selectedConvertImage: String
     var maxamized: Bool = false
+    var moreVisible: Bool = false
 
     init(
         droppedBookmarks: [Data] = [],
         outputBookmark: Data? = nil,
         selectedConvertImage: UTType = .png,
-        maxamized: Bool = false
+        maxamized: Bool = false,
+        moreVisible: Bool = false
     ) {
         self.droppedBookmarks = droppedBookmarks
         self.outputBookmark = outputBookmark
         self.selectedConvertImage = selectedConvertImage.identifier
         self.maxamized = maxamized
+        self.moreVisible = moreVisible
     }
 }

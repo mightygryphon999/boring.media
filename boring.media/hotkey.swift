@@ -29,7 +29,9 @@ extension AppDelegate {
         hotKeyL?.keyDownHandler = { [weak self] in
             guard let self = self else { return }
 
-            self.appState.maxamized.toggle()
+            withAnimation(.spring(duration: 0.45)) {
+                self.appState.maxamized.toggle()
+            }
         }
     }
 }

@@ -16,6 +16,16 @@ struct ContentView: View {
             if (appState.maxamized){
                 FileListView()
                     .environmentObject(appState)
+                    .transition(
+                            .asymmetric(
+                                insertion: .move(edge: .bottom)
+                                    .combined(with: .opacity)
+                                    .combined(with: .scale(scale: 0.95)),
+                                
+                                removal: .move(edge: .top)
+                                    .combined(with: .opacity)
+                            )
+                        )
             }
         }
         .padding()
@@ -71,7 +81,11 @@ struct ContentView: View {
                 print("Failed to save output bookmark:", error)
             }
         }
-        
+        .onChange(of: appState.moreVisible) { _, newValue in
+            let data = getSaveData()
+            data.moreVisible = newValue
+            try? context.save()
+        }
         .onChange(of: appState.droppedURLs) { _, newValue in
             let data = getSaveData()
             
